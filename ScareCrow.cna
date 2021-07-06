@@ -40,7 +40,6 @@ sub ScareCrowCallback {
 	prompt_file_save("scbeacon.bin", {
 
 		show_message("Generating executable, please wait...");
-		close_message
 
 		$path = "$1";
 	
