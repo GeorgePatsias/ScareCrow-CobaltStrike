@@ -34,7 +34,7 @@ go build ScareCrow.go
 
 ## Setup CNA Script Configurations
 
-Edit the ScareCrow.cna and replace the variables below accordingly.
+Edit the ScareCrow.cna and replace the variables below accordingly. NOTE! Do not add the final / at the end of the paths!
 ```
 $script_path = "Path of this GitHub project e.g. /home/user/Scare/ScareCrow-CobaltStrike";
 $scarecrow_executable = "https://github.com/optiv/ScareCrow path to the compiled ScareCrow go executable e.g.  /home/user/ScareCrow/ScareCrow";
