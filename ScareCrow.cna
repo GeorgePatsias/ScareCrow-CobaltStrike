@@ -1,9 +1,9 @@
 ############################################################
 # Please do not use / at the end of the directories!
 ############################################################
-$script_path = "/home/kali/projects/ScareCrow-CobaltStrike";
-$scarecrow_executable = "/home/kali/projects/ScareCrow-CobaltStrike/ScareCrow/ScareCrow";
-$cs_directory = "/home/kali/pentestlab/cobaltstrike";
+$script_path = "/home/kali/ScareCrow-CobaltStrike";
+$scarecrow_executable = "/home/kali/ScareCrow-CobaltStrike/ScareCrow/ScareCrow";
+$cs_directory = "/home/kali/cobaltstrike";
 $python3 = "/usr/bin/python3";
 ############################################################
 
