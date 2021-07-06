@@ -10,7 +10,7 @@ $python3 = "/usr/bin/python3";
 menubar("ScareCrow", "scare_crow");
 
 popup scare_crow {
-	item "&ScareCrow" {
+	item "&Generate" {
 		ScareCrow();
 	}
 }
