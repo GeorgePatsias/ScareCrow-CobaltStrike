@@ -20,7 +20,9 @@ sub ScareCrow {
 	drow_listener_stage($dialog, "listener", "Listener: ");
     drow_combobox($dialog, "payload_type", "Payload Type: ", @("Stageless"));
     drow_combobox($dialog, "architecture", "Architecture: ", @("x64"));
-    drow_combobox($dialog, "loader", "Loader: ", @("binary"));
+    drow_combobox($dialog, "loader", "Loader: ", @("binary", "dll"));
+	drow_checkbox($dialog, "etw", "ETW patching");
+	drow_checkbox($dialog, "sandbox", "Sandbox evasion");
     drow_text($dialog, "domain", "Domain: ");
 	dbutton_action($dialog, "Generate");
 	dialog_show($dialog);
@@ -36,6 +38,8 @@ sub ScareCrowCallback {
 
 	$loader = $3['loader'];
 	$domain = $3['domain'];
+	$etw = $3['etw'];
+	$sandbox = $3['sandbox'];
 
 	prompt_file_save("scbeacon.bin", {
 
@@ -47,7 +51,7 @@ sub ScareCrowCallback {
 		writeb($handle, $shellcode);
 		closef($handle);
 
-		$data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $scarecrow_executable . " " . $1 . " " . $loader . " " . $domain . " " . $cs_directory);
+		$data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $scarecrow_executable . " " . $1 . " " . $loader . " " . $domain . " " . $cs_directory . " " . $etw . " " . $sandbox);
 		$pythondata = readAll($data);
 		
 		show_message("Executable saved to: " . $pythondata);
