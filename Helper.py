@@ -4,8 +4,17 @@ from sys import argv
 from subprocess import check_output, Popen, PIPE, call
 
 
-def generate(executable, payload, loader, domain, cs_directory):
-    process = Popen([executable, '-I', payload, '-Loader', loader, '-domain', domain], stdout=PIPE)
+def generate(executable, payload, loader, domain, cs_directory, etw, sandbox):
+
+    command = [executable, '-I', payload, '-Loader', loader, '-domain', domain]
+
+    if etw:
+        command.append('-etw')
+
+    if sandbox:
+        command.append('-sandbox')
+
+    process = Popen(command, stdout=PIPE)
     stdout, stderr = process.communicate()
 
     reader = stdout.decode('utf-8').splitlines()
@@ -26,5 +35,5 @@ def generate(executable, payload, loader, domain, cs_directory):
 if __name__ == '__main__':
     arg_list = argv[1:]
 
-    shellcode_dir = generate(arg_list[0], arg_list[1], arg_list[2], arg_list[3], arg_list[4])
+    shellcode_dir = generate(arg_list[0], arg_list[1], arg_list[2], arg_list[3], arg_list[4], arg_list[5], arg_list[6])
     print(shellcode_dir)
