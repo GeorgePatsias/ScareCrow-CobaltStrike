@@ -2,7 +2,7 @@
 
 A Cobalt Strike script for ScareCrow payload generation. Works only with the binary Loader.
 
-### ScareCrow Options
+### ScareCrow Available Options
 ```bash
 -I string
     Path to the raw 64-bit shellcode.
