@@ -15,11 +15,6 @@ A Cobalt Strike script for ScareCrow payload generation. Works only with the bin
 -sandbox
     Enables sandbox evasion using IsDomainedJoined calls.
 ```
-
-#### What is being used for the generated executable
-```bash
-./ScareCrow -I beacon.bin -Loader binary -domain microsoft.com
-```
 ## Download Project
 ```bash
 git clone https://github.com/GeorgePatsias/ScareCrow-CobaltStrike.git
