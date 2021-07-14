@@ -1,4 +1,4 @@
-# ScareCrow-CobaltStrike script
+# ScareCrow CobaltStrike intergration CNA
 
 A Cobalt Strike script for ScareCrow payload generation. Works only with the binary Loader.
 
