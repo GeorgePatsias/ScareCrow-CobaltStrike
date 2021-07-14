@@ -1,6 +1,6 @@
 # ScareCrow CobaltStrike intergration CNA
 
-A Cobalt Strike script for ScareCrow payload generation. Works only with the binary Loader.
+A Cobalt Strike script for ScareCrow payload generation. Works only with the binary and DLL Loader.
 
 ### ScareCrow Available Options
 ```bash
