@@ -1,8 +1,8 @@
-# ScareCrow CobaltStrike intergration CNA
+# 🎃🌽 ScareCrow Cobalt Strike intergration CNA
 
 A Cobalt Strike script for ScareCrow payload generation. Works only with the binary and DLL Loader.
 
-### ScareCrow Available Options
+### 💣 ScareCrow Available Options
 ```bash
 -I string
     Path to the raw 64-bit shellcode.
@@ -15,45 +15,42 @@ A Cobalt Strike script for ScareCrow payload generation. Works only with the bin
 -sandbox
     Enables sandbox evasion using IsDomainedJoined calls.
 ```
-## Download Project
+## 📥 Clone the Project
 ```bash
 git clone https://github.com/GeorgePatsias/ScareCrow-CobaltStrike.git
 ```
 
-## ScareCrow Installation
+## 🏭 Install ScareCrow
 
-Setup ScareCrow [https://github.com/optiv/ScareCrow](https://github.com/optiv/ScareCrow)
+Setup ScareCrow [https://github.com/optiv/ScareCrow](https://github.com/optiv/ScareCrow) just by running the `install.sh` script.
 ```bash
-git clone https://github.com/optiv/ScareCrow
-cd ScareCrow
-go get github.com/fatih/color
-go get github.com/yeka/zip
-go get github.com/josephspurrier/goversioninfo
-```
-Make sure that the following packages are installed on your machine:
-```
-sudo apt-get install openssl osslsigncode mingw-w64 -y;
+chmod +x install.sh
+./install.sh
 ```
 
-Build ScareCrow project
+## 🔧 Setup CNA Script Configurations
 
+Edit the ScareCrow.cna and replace the variables below accordingly. **NOTE!** Do not add the final **/** at the end of the paths!
 ```
-go build ScareCrow.go
-```
+#Path to the ScareCrow-CobaltStrike repository you just cloned.
+$script_path = "/home/user/ScareCrow-CobaltStrike";
 
-## Setup CNA Script Configurations
+#Path to the compiled ScareCrow Go executable of the installation.
+$scarecrow_executable = "/home/user/ScareCrow-CobaltStrike/ScareCrow/ScareCrow";
 
-Edit the ScareCrow.cna and replace the variables below accordingly. NOTE! Do not add the final / at the end of the paths!
-```
-$script_path = "Path of this GitHub project e.g. /home/user/Scare/ScareCrow-CobaltStrike";
-$scarecrow_executable = "https://github.com/optiv/ScareCrow path to the compiled ScareCrow go executable e.g.  /home/user/ScareCrow/ScareCrow";
-$cs_directory = "CobaltStrike's Installtion directory e.g. /home/kali/cobaltstrike";
+#Path to the CobaltStrike directory.
+$cs_directory = "/home/user/cobaltstrike";
+
+#Path to the python3 binary.
 $python3 = "/usr/bin/python3";
 ```
 
-## Add the CNA script to Cobalt Strike
-Cobalt Strike > Script Manager > Load > Select ScareCrow.cna
+## 💀 Add the CNA script to Cobalt Strike
+`Cobalt Strike > Script Manager > Load > Select ScareCrow.cna`
 
-You will see the new menu called ScareCrow on the top menu of CS.
+You will see the new menu item called **ScareCrow** on the top menu of Cobalt Strike.
 
-## More options and work still in progress...
+## References
+[https://github.com/optiv/ScareCrow](https://github.com/optiv/ScareCrow)
+
+## 🔨 More options and work still in progress...
