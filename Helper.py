@@ -8,10 +8,10 @@ def generate(executable, payload, loader, domain, cs_directory, etw, sandbox):
 
     command = [executable, '-I', payload, '-Loader', loader, '-domain', domain]
 
-    if etw:
+    if etw is "true":
         command.append('-etw')
 
-    if sandbox:
+    if sandbox is "true":
         command.append('-sandbox')
 
     process = Popen(command, stdout=PIPE)
@@ -23,6 +23,7 @@ def generate(executable, payload, loader, domain, cs_directory, etw, sandbox):
     for row in reader:
         if row.startswith('[*] Signing'):
             filename = row
+            break
 
     filename = filename.split('[*] Signing ')[1].split(' With a Fake Cert')[0]
 
