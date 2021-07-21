@@ -36,3 +36,4 @@ if __name__ == '__main__':
     arg_list = argv[1:]
 
     shellcode_dir = generate(arg_list[0], arg_list[1], arg_list[2], arg_list[3], arg_list[4], arg_list[5], arg_list[6])
+    print(shellcode_dir)
