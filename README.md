@@ -1,4 +1,9 @@
-# 🎃🌽 ScareCrow Cobalt Strike intergration CNA
+<h1 align="center">
+<br>
+<img src=image.png >
+<br>
+ScareCrow Cobalt Strike integration CNA
+</h1>
 
 A Cobalt Strike script for ScareCrow payload generation. Works only with the binary and DLL Loader.
 
