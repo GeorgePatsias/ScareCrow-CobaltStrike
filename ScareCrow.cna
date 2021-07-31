@@ -33,7 +33,7 @@ sub ScareCrow {
     %defaults["domain"] = "www.microsoft.com";
 
     $dialog = dialog("ScareCrow Payload Generator (S)", %defaults, &mainCallback);
-    dialog_description($dialog, "Generate an EXE or DLL payload");
+    dialog_description($dialog, "Generate EDR evasion payloads");
     drow_listener_stage($dialog, "listener", "Listener: ");
     drow_file($dialog, "custom_binary", "Use your custom x64 Shellcode: ");
     drow_combobox($dialog, "payload_type", "Payload Type: ", @("Stageless"));
