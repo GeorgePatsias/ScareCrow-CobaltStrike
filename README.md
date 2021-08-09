@@ -64,4 +64,9 @@ You will see the new menu item called **ScareCrow** on the top menu of Cobalt St
 ## References
 [https://github.com/optiv/ScareCrow](https://github.com/optiv/ScareCrow)
 
+### Side note
+Run DLLs as following and slightly change the name of the exported DLL
+`rundll32 example.dll,DllRegisterServer`
+`rundll32 example.dll,DllGetClassObject`
+
 ## 🔨 More options and work still in progress...
