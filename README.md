@@ -68,6 +68,7 @@ You will see the new menu item called **ScareCrow** on the top menu of Cobalt St
 Run DLLs as following and slightly change the name of the exported DLL
 <br>
 `rundll32 example.dll,DllRegisterServer`
+<br>
 `rundll32 example.dll,DllGetClassObject`
 
 ## 🔨 More options and work still in progress...
