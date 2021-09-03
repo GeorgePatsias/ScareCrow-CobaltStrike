@@ -17,7 +17,6 @@ $etw = "";
 $sandbox = "";
 $custom_bin = "";
 $loader_name = "";
-$custom_bin = "";
 $shellcode = "";
 
 menubar("ScareCrow", "scare_crow");
