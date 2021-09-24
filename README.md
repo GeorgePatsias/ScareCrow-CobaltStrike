@@ -7,8 +7,6 @@ Cobalt Strike ⇌ ScareCrow
 CNA Script
 </h1>
 
-A Cobalt Strike script for ScareCrow payload generation. Works with all Loaders.
-
 ### 💣 ScareCrow Available Options
 ```bash
 -I string
