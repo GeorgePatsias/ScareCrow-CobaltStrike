@@ -7,7 +7,7 @@ Cobalt Strike ⇌ ScareCrow
 CNA Script
 </h1>
 
-### 💣 ScareCrow Available Options
+### 💣 ScareCrow Options
 ```bash
 -I string
     Path to the raw 64-bit shellcode.
