@@ -77,6 +77,11 @@ sub mainCallback {
     $custom_bin = $3["custom_binary"];
     $injection = $3["injection"];
 
+    if ($injection ne "" && $etw eq "true"){
+        show_message("Currently process injection and ETW bypass is not available together yet. Please try only one of these options");
+        exit();
+    }
+
     if ($custom_bin ne ""){   
         $shellcode_file = openf($custom_bin);
         $shellcode = readb($shellcode_file, -1);
