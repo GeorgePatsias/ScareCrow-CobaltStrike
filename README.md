@@ -68,4 +68,4 @@ You will see the new menu item called **ScareCrow** on the top menu of Cobalt St
 
 ### Side note
 * Run DLLs as following and slightly change the name of the exported DLL <br> `rundll32 example.dll,DllRegisterServer` <br> `rundll32 example.dll,DllGetClassObject`
-* Process Injection field must be defined with single `\` e.g `C:\Windows\System32\notepad.exe`
+* Process Injection field must be defined with a single `\` e.g `C:\Windows\System32\notepad.exe`
