@@ -18,6 +18,7 @@ $sandbox = "";
 $custom_bin = "";
 $loader_name = "";
 $shellcode = "";
+$injection = "";
 
 menubar("ScareCrow", "scare_crow");
 
@@ -32,15 +33,16 @@ sub ScareCrow {
     %defaults["domain"] = "www.microsoft.com";
 
     $dialog = dialog("ScareCrow Payload Generator (S)", %defaults, &mainCallback);
-    dialog_description($dialog, "Generate EDR evasion payloads");
-    drow_listener_stage($dialog, "listener", "Listener: ");
-    drow_file($dialog, "custom_binary", "Use your custom x64 Shellcode: ");
-    drow_combobox($dialog, "payload_type", "Payload Type: ", @("Stageless"));
-    drow_combobox($dialog, "architecture", "Architecture: ", @("x64"));
-    drow_combobox($dialog, "loader", "Loader: ", @("binary", "control", "dll", "excel", "msiexec", "wscript"));
-    drow_checkbox($dialog, "etw", "ETW patching");
-    drow_checkbox($dialog, "sandbox", "Sandbox evasion");
-    drow_text($dialog, "domain", "Domain: ");
+    dialog_description($dialog, "Generate EDR evasion payloads. (#) for optional, (*) for required options.");
+    drow_listener_stage($dialog, "listener", "(*) Listener: ");
+    drow_file($dialog, "custom_binary", "(#) Custom x64 Shellcode: ");
+    drow_combobox($dialog, "payload_type", "(*) Payload Type: ", @("Stageless"));
+    drow_combobox($dialog, "architecture", "(*) Architecture: ", @("x64"));
+    drow_combobox($dialog, "loader", "(*) Loader: ", @("binary", "control", "dll", "excel", "msiexec", "wscript"));
+    drow_checkbox($dialog, "etw", "(#) ETW patching");
+    drow_checkbox($dialog, "sandbox", "(#) Sandbox evasion");
+    drow_text($dialog, "injection", "(#) Process Injection: ");
+    drow_text($dialog, "domain", "(*) Domain: ");
     dbutton_action($dialog, "Generate");
     dbutton_help($dialog, "https://github.com/GeorgePatsias/ScareCrow-CobaltStrike");
     dialog_show($dialog);
@@ -73,6 +75,7 @@ sub mainCallback {
     $etw = $3["etw"];
     $sandbox = $3["sandbox"];
     $custom_bin = $3["custom_binary"];
+    $injection = $3["injection"];
 
     if ($custom_bin ne ""){   
         $shellcode_file = openf($custom_bin);
@@ -95,7 +98,6 @@ sub mainCallback {
     }else if ($loader eq "wscript"){
         loaderDialog();
     }
-
 }
 
 sub GeneratePayload {
@@ -106,7 +108,7 @@ sub GeneratePayload {
         writeb($handle, $shellcode);
         closef($handle);
 
-        $data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $scarecrow_executable . " " . $1 . " " . $loader . " " . $domain . " " . $cs_directory . " " . $etw . " " . $sandbox . " ". $loader_name);
+        $data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $scarecrow_executable . " " . $1 . " " . $loader . " " . $domain . " " . $cs_directory . " " . $etw . " " . $sandbox . " " . $injection . " " . $loader_name);
         $pythondata = readAll($data);
 
         show_message("Executable saved to: " . $pythondata);
