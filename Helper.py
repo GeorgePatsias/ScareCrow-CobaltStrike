@@ -9,7 +9,7 @@ def generate(executable, payload, loader, domain, cs_directory, etw, sandbox, ps
     command = [executable, '-I', payload, '-Loader', loader, '-domain', domain]
 
     if etw == 'true':
-        command.append('-etw')
+        command.append('-noetw')
 
     if sandbox == 'true':
         command.append('-sandbox')
@@ -59,6 +59,8 @@ def generate(executable, payload, loader, domain, cs_directory, etw, sandbox, ps
 if __name__ == '__main__':
     arg_list = argv[1:]
 
+    if len(arg_list) < 8:
+        arg_list.append(None)
     if len(arg_list) < 9:
         arg_list.append(None)
 
