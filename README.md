@@ -7,6 +7,8 @@ Cobalt Strike ⇌ ScareCrow
 CNA Script
 </h1>
 
+https://adamsvoboda.net/evading-edr-with-scarecrow/
+
 ### 💣 ScareCrow Options
 ```bash
 -I string
