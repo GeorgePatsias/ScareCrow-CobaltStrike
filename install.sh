@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt-get install openssl osslsigncode mingw-w64 -y;
+sudo apt-get install openssl osslsigncode mingw-w64 golang -y;
 git clone https://github.com/optiv/ScareCrow;
 cd ScareCrow;
 go get github.com/fatih/color;
