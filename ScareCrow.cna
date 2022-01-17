@@ -23,7 +23,7 @@ $injection = "";
 menubar("ScareCrow", "scare_crow");
 
 popup scare_crow {
-    item "&Generate" {
+    item "&Generate Payload" {
         ScareCrow();
     }
 }
@@ -39,11 +39,11 @@ sub ScareCrow {
     drow_combobox($dialog, "payload_type", "(*) Payload Type: ", @("Stageless"));
     drow_combobox($dialog, "architecture", "(*) Architecture: ", @("x64"));
     drow_combobox($dialog, "loader", "(*) Loader: ", @("binary", "control", "dll", "excel", "msiexec", "wscript"));
-    drow_checkbox($dialog, "etw", "(#) ETW patching");
+    drow_checkbox($dialog, "etw", "(#) Disable ETW patching (enabled by default)");
     drow_checkbox($dialog, "sandbox", "(#) Sandbox evasion");
     drow_text($dialog, "injection", "(#) Process Injection: ");
     drow_text($dialog, "domain", "(*) Domain: ");
-    dbutton_action($dialog, "Generate");
+    dbutton_action($dialog, "Generate Payload");
     dbutton_help($dialog, "https://github.com/GeorgePatsias/ScareCrow-CobaltStrike");
     dialog_show($dialog);
 }
@@ -77,8 +77,8 @@ sub mainCallback {
     $custom_bin = $3["custom_binary"];
     $injection = $3["injection"];
 
-    if ($injection ne "" && $etw eq "true"){
-        show_message("Currently process injection and ETW bypass is not available together yet. Please try only one of these options");
+    if ($injection ne "" && $etw eq "false"){
+        show_message("Cannot use Process Injection and ETW patching together. Disable ETW patching if you want to do a Process Injection");
         exit();
     }
 
