@@ -20,7 +20,7 @@ CNA Script
     [*] msiexec - Loads into MSIexec process using a JScript loader.
     [*] wscript - Loads into WScript process using a JScript loader.
 -noetw
-    Disables the ETW patching that prevents ETW events from being generated.
+    Disables the ETW patching that prevents ETW events from being generated (Enabled by default).
 -sandbox
     Enables sandbox evasion using IsDomainedJoined calls.
 -injection string
