@@ -7,8 +7,6 @@ Cobalt Strike ⇌ ScareCrow
 CNA Script
 </h1>
 
-https://adamsvoboda.net/evading-edr-with-scarecrow/
-
 ### 💣 ScareCrow Options
 ```bash
 -I string
@@ -63,9 +61,12 @@ $python3 = "/usr/bin/python3";
 
 You will see the new menu item called **ScareCrow** on the top menu of Cobalt Strike.
 
-## References
-[https://github.com/optiv/ScareCrow](https://github.com/optiv/ScareCrow)
-
 ### Side note
 * Run DLLs as following and slightly change the name of the exported DLL <br> `rundll32 example.dll,DllRegisterServer` <br> `rundll32 example.dll,DllGetClassObject`
 * Process Injection field must be defined with a single `\` e.g `C:\Windows\System32\notepad.exe`
+
+## 📖 References
+* [https://github.com/optiv/ScareCrow](https://github.com/optiv/ScareCrow)
+* https://adamsvoboda.net/evading-edr-with-scarecrow/<br/>
+* https://www.optiv.com/insights/source-zero/blog/endpoint-detection-and-response-how-hackers-have-evolved (Part 1)<br/>
+* https://www.optiv.com/insights/source-zero/blog/edr-and-blending-how-attackers-avoid-getting-caught (Part 2)
