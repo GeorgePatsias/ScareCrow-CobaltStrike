@@ -4,8 +4,10 @@
 <br>
 Cobalt Strike ⇌ ScareCrow
 <br>
-CNA Script
+(EDR/AV evasion)
 </h1>
+
+<h3 align="center">EDR unhooking, Syscall loading, ETW patch, Process Injection, Signed Loader, AES encrypt</h3>
 
 ### 💣 ScareCrow Options
 ```bash
