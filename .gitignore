@@ -5,3 +5,4 @@ ScareCrow/
 *.log
 venv/
 ScareCrow-dev.cna
+.lib
