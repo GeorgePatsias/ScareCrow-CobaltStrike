@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-<img src=image.png >
+<img src=image.png>
 <br>
 Cobalt Strike ⇌ ScareCrow
 <br>
@@ -21,12 +21,20 @@ Cobalt Strike ⇌ ScareCrow
     [*] excel - Loads into a hidden Excel process using a JScript loader.
     [*] msiexec - Loads into MSIexec process using a JScript loader.
     [*] wscript - Loads into WScript process using a JScript loader.
+-O string
+    Name of output file (e.g. loader.js or loader.hta). If Loader is set to dll or binary this option is not required.
+-domain string
+    The domain name to use for creating a fake code signing cert. (e.g. www.acme.com) 
+-injection string
+    Enables Process Injection Mode and specify the path to the process to create/inject into (use \ for the path).
+-noamsi
+    Disables the AMSI patching that prevents AMSI BuffferScanner.
 -noetw
-    Disables the ETW patching that prevents ETW events from being generated (Enabled by default).
+    Disables the ETW patching that prevents ETW events from being generated.
+-nosleep
+    Disables the sleep delay before the loader unhooks and executes the shellcode.
 -sandbox
     Enables sandbox evasion using IsDomainedJoined calls.
--injection string
-    Enables Process Injection Mode and specifies the path to the process to create/inject into (use \ for the path).
 ```
 ## 📥 Clone the Project
 ```bash
@@ -63,9 +71,13 @@ $python3 = "/usr/bin/python3";
 
 You will see the new menu item called **ScareCrow** on the top menu of Cobalt Strike.
 
-### Side note
+### Side notes
 * Run DLLs as following and slightly change the name of the exported DLL <br> `rundll32 example.dll,DllRegisterServer` <br> `rundll32 example.dll,DllGetClassObject`
 * Process Injection field must be defined with a single `\` e.g `C:\Windows\System32\notepad.exe`
+* When signing the loader with microsoft.com, using them against WINDOWS DEFENDER ATP products may not be as effective as they can validate the cert as it belongs to them. If you are using a loader against a windows product possibly use a different domain.
+
+## 📖 Screenshot
+<img src=Screenshot1.png>
 
 ## 📖 References
 * [https://github.com/optiv/ScareCrow](https://github.com/optiv/ScareCrow)

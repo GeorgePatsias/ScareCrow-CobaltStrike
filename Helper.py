@@ -1,41 +1,46 @@
 #!/usr/bin/python3
 import os.path
-from sys import argv
+from json import loads
+from sys import argv, exit
 from subprocess import check_output, Popen, PIPE, call
 
 
-def generate(executable, payload, loader, domain, cs_directory, etw, sandbox, ps_injection, loader_name):
+def generate_payload(data):
+    command = [data['scarecrow_executable'], '-I', data['payload'], '-Loader', data['loader'], '-domain', data['domain']]
 
-    command = [executable, '-I', payload, '-Loader', loader, '-domain', domain]
+    if data['noamsi']:
+        command.append('-noamsi')
 
-    if etw == 'true':
+    if data['noetw']:
         command.append('-noetw')
 
-    if sandbox == 'true':
+    if data['nosleep']:
+        command.append('-nosleep')
+
+    if data['sandbox']:
         command.append('-sandbox')
 
-    if ps_injection:
+    if data['injection']:
         command.append('-injection')
-        command.append('{}'.format(ps_injection))
+        command.append('{}'.format(data['injection']))
 
-    if loader_name:
-        if not loader_name.endswith('.js'):
-            loader_name = "{}.js".format(loader_name)
+    if data['loader_name']:
+        if not data['loader_name'].endswith('.js') and not data['loader_name'].endswith('.hta'):
+            response_message("[!] Please select .js or .hta loader for the payload.")
         command.append('-O')
-        command.append(loader_name)
+        command.append(data['loader_name'])
 
-    filename = None
-    if loader in ["control", "excel", "msiexec", "wscript"] and loader_name:
-        filename = loader_name
-    elif loader in ["excel", "msiexec", "wscript"] and not loader_name:
-        filename = "Loader.js"
+    filename = "Loader.js"
+    if data['loader_name'] and data['loader'] in ["control", "excel", "msiexec", "wscript"]:
+        filename = data['loader_name']
+    elif not data['loader_name'] and data['loader'] in ["excel", "msiexec", "wscript"]:
         command.append('-O')
         command.append(filename)
-
+    
     process = Popen(command, stdout=PIPE)
     stdout, stderr = process.communicate()    
     
-    if loader in ["binary", "dll", "control"]:
+    if data['loader'] in ["binary", "dll", "control"]:
         for row in stdout.decode('utf-8').splitlines():
             if row.startswith('[*] Signing'):
                 filename = row
@@ -43,26 +48,43 @@ def generate(executable, payload, loader, domain, cs_directory, etw, sandbox, ps
 
         filename = filename.split('[*] Signing ')[1].split(' With a Fake Cert')[0]
 
-        if loader == "control" and not loader_name:
+        if data['loader'] == "control" and not data['loader_name']:
             filename = filename[:-3] + "cpl"
 
-        elif loader == "control" and loader_name:
-            filename = loader_name
+        elif data['loader'] == "control" and data['loader_name']:
+            filename = data['loader_name']
 
-    call(['mv', cs_directory + '/' + filename, os.path.dirname(payload) + "/"])
+    call(['mv', data['cobaltstrike_directory'] + '/' + filename, os.path.dirname(data['payload']) + "/"])
     
-    check_output(['rm', '-f', payload])
+    check_output(['rm', '-f', data['payload']])
 
-    return os.path.dirname(payload) + "/" + filename
+    response_message("Payload successfuly generated at: " + os.path.dirname(data['payload']) + "/" + filename)
 
+
+def normalize_data(json_data):
+    try:
+        data = {}
+        for key, value in json_data.items():
+            if value == "false" or value == "":
+                value = False
+            if value == "true":
+                value == True
+
+            data[key] = json_data[key]
+
+        return data
+
+    except Exception:
+        response_message("Error - Something went wrong normalizing the data.")
+
+
+def response_message(message):
+    print(message)
+    exit()
 
 if __name__ == '__main__':
-    arg_list = argv[1:]
+    cobaltstrike_data = loads(argv[1:][0])
+    cobaltstrike_data = normalize_data(cobaltstrike_data)
 
-    if len(arg_list) < 8:
-        arg_list.append(None)
-    if len(arg_list) < 9:
-        arg_list.append(None)
+    generate_payload(cobaltstrike_data)
 
-    shellcode_dir = generate(arg_list[0], arg_list[1], arg_list[2], arg_list[3], arg_list[4], arg_list[5], arg_list[6], arg_list[7], arg_list[8])
-    print(shellcode_dir)
