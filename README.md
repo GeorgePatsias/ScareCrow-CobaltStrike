@@ -7,14 +7,18 @@ Cobalt Strike ⇌ ScareCrow
 (EDR/AV evasion)
 </h1>
 
-<h4 align="center">EDR unhooking, Syscall loading, ETW patch, Process Injection, Signed Loader, AES encrypt</h4>
+<h4 align="center">EDR unhooking, Syscall loading, ETW/AMSI patch, Process Injection, Signed Loader, AES encrypt</h4>
 
-<p align="center">
-![GitHub stars](https://img.shields.io/github/stars/GeorgePatsias/ScareCrow-CobaltStrike?style=social)
-![GitHub forks](https://img.shields.io/github/forks/GeorgePatsias/ScareCrow-CobaltStrike?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/GeorgePatsias/ScareCrow-CobaltStrike?style=social)
-![GitHub followers](https://img.shields.io/github/followers/GeorgePatsias?style=social)
-</p>
+<div align="center">
+    
+![GitHub stars](https://img.shields.io/github/stars/GeorgePatsias/ScareCrow-CobaltStrike)
+![GitHub forks](https://img.shields.io/github/forks/GeorgePatsias/ScareCrow-CobaltStrike)
+![GitHub size](https://img.shields.io/github/languages/code-size/GeorgePatsias/ScareCrow-CobaltStrike)
+![GitHub lastcommit](https://img.shields.io/github/last-commit/GeorgePatsias/ScareCrow-CobaltStrike)
+<br>
+![Github twitter](https://img.shields.io/twitter/follow/GeorgePatsias1?label=Follow%20%40%20Twitter&style=social)
+
+</div>
 
 ### 💣 ScareCrow Options
 ```bash
@@ -91,7 +95,3 @@ You will see the new menu item called **ScareCrow** on the top menu of Cobalt St
 * https://adamsvoboda.net/evading-edr-with-scarecrow/<br/>
 * https://www.optiv.com/insights/source-zero/blog/endpoint-detection-and-response-how-hackers-have-evolved (Part 1)<br/>
 * https://www.optiv.com/insights/source-zero/blog/edr-and-blending-how-attackers-avoid-getting-caught (Part 2)
-
-<a href="https://twitter.com/intent/follow?screen_name=GeorgePatsias1">
-<img src="https://img.shields.io/twitter/follow/GeorgePatsias1?style=social&logo=twitter" alt="follow on Twitter">
-</a>
