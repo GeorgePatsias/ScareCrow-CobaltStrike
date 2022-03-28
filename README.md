@@ -84,3 +84,7 @@ You will see the new menu item called **ScareCrow** on the top menu of Cobalt St
 * https://adamsvoboda.net/evading-edr-with-scarecrow/<br/>
 * https://www.optiv.com/insights/source-zero/blog/endpoint-detection-and-response-how-hackers-have-evolved (Part 1)<br/>
 * https://www.optiv.com/insights/source-zero/blog/edr-and-blending-how-attackers-avoid-getting-caught (Part 2)
+
+<a href="https://twitter.com/intent/follow?screen_name=GeorgePatsias1">
+<img src="https://img.shields.io/twitter/follow/GeorgePatsias1?style=social&logo=twitter" alt="follow on Twitter">
+</a>
