@@ -9,6 +9,13 @@ Cobalt Strike ⇌ ScareCrow
 
 <h4 align="center">EDR unhooking, Syscall loading, ETW patch, Process Injection, Signed Loader, AES encrypt</h4>
 
+<p align="center">
+![GitHub stars](https://img.shields.io/github/stars/GeorgePatsias/ScareCrow-CobaltStrike?style=social)
+![GitHub forks](https://img.shields.io/github/forks/GeorgePatsias/ScareCrow-CobaltStrike?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/GeorgePatsias/ScareCrow-CobaltStrike?style=social)
+![GitHub followers](https://img.shields.io/github/followers/GeorgePatsias?style=social)
+</p>
+
 ### 💣 ScareCrow Options
 ```bash
 -I string
