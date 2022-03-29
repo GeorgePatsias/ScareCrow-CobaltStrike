@@ -16,7 +16,7 @@ Cobalt Strike ⇌ ScareCrow
 ![GitHub size](https://img.shields.io/github/languages/code-size/GeorgePatsias/ScareCrow-CobaltStrike)
 ![GitHub lastcommit](https://img.shields.io/github/last-commit/GeorgePatsias/ScareCrow-CobaltStrike)
 <br>
-<a href="https://twitter.com/intent/follow?screen_name=GeorgePatsias1" target="_blank">
+<a href="https://twitter.com/intent/follow?screen_name=GeorgePatsias1">
 ![Github twitter](https://img.shields.io/twitter/follow/GeorgePatsias1?label=Follow%20%40%20Twitter&style=social)
 </a>
 </div>
