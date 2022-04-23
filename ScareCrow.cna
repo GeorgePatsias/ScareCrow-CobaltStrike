@@ -5,8 +5,6 @@
 $script_path = "/home/user/ScareCrow-CobaltStrike";
 #Path to the compiled ScareCrow Go executable of the installation.
 $scarecrow_executable = "/home/user/ScareCrow-CobaltStrike/ScareCrow/ScareCrow";
-#Path to the python3 binary.
-$python3 = "/usr/bin/python3";
 ############################################################
 
 $loader = "";
@@ -131,7 +129,7 @@ sub GeneratePayload {
         $arguments = $arguments . '"script_path":' . '"' . $script_path . '"';
         $arguments = $arguments . '}';
 
-        $data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $arguments);
+        $data = exec("python3 " . $script_path . "/Helper.py" . " " . $arguments);
 
         $helper_response = readAll($data);
 
