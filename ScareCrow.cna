@@ -5,8 +5,6 @@
 $script_path = "/home/user/ScareCrow-CobaltStrike";
 #Path to the compiled ScareCrow Go executable of the installation.
 $scarecrow_executable = "/home/user/ScareCrow-CobaltStrike/ScareCrow/ScareCrow";
-#Path to the CobaltStrike directory.
-$cobaltstrike_directory = "/home/user/cobaltstrike";
 #Path to the python3 binary.
 $python3 = "/usr/bin/python3";
 ############################################################
@@ -124,13 +122,13 @@ sub GeneratePayload {
         $arguments = $arguments . '"payload":' . '"' . $1 . '"' . ',';
         $arguments = $arguments . '"loader":' . '"' . $loader . '"' . ',';
         $arguments = $arguments . '"domain":' . '"' . $domain . '"' . ',';
-        $arguments = $arguments . '"cobaltstrike_directory":' . '"' . $cobaltstrike_directory . '"' . ',';
         $arguments = $arguments . '"noamsi":' . '"' . $noamsi . '"' . ',';
         $arguments = $arguments . '"noetw":' . '"' . $noetw . '"' . ',';
         $arguments = $arguments . '"nosleep":' . '"' . $nosleep . '"' . ',';
         $arguments = $arguments . '"sandbox":' . '"' . $sandbox . '"' . ',';
         $arguments = $arguments . '"injection":' . '"' . $injection . '"' . ',';
-        $arguments = $arguments . '"loader_name":' . '"' . $loader_name . '"';
+        $arguments = $arguments . '"loader_name":' . '"' . $loader_name . '"' . ',';
+        $arguments = $arguments . '"script_path":' . '"' . $script_path . '"';
         $arguments = $arguments . '}';
 
         $data = exec($python3 . " " . $script_path . "/Helper.py" . " " . $arguments);
