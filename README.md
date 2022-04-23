@@ -70,9 +70,6 @@ $script_path = "/home/user/ScareCrow-CobaltStrike";
 
 #Path to the compiled ScareCrow Go executable of the installation.
 $scarecrow_executable = "/home/user/ScareCrow-CobaltStrike/ScareCrow/ScareCrow";
-
-#Path to the python3 binary.
-$python3 = "/usr/bin/python3";
 ```
 
 ## 💀 Add the CNA script to Cobalt Strike
