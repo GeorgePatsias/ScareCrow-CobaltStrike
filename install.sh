@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo apt-get update;
 sudo apt-get install openssl osslsigncode mingw-w64 golang -y;
 git clone https://github.com/optiv/ScareCrow;
 cd ScareCrow;
