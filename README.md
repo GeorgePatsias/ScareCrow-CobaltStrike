@@ -90,3 +90,5 @@ You will see the new menu item called **ScareCrow** on the top menu of Cobalt St
 * https://adamsvoboda.net/evading-edr-with-scarecrow/<br/>
 * https://www.optiv.com/insights/source-zero/blog/endpoint-detection-and-response-how-hackers-have-evolved (Part 1)<br/>
 * https://www.optiv.com/insights/source-zero/blog/edr-and-blending-how-attackers-avoid-getting-caught (Part 2)
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/UserX)
